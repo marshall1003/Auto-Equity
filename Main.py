@@ -17,13 +17,12 @@ def main ():
     df[Constants.CPF_RESTRICTION].replace([True, False], ["True","False"], inplace=True)
     df[Constants.CPF_RESTRICTION].fillna(Constants.NOT_DEFINED, inplace=True)
     Tratamento.idade_df(df)
-    print(df["age"])
     Tratamento.adjust_money_to_float(df, Constants.LOAN_AMOUNT)
     Tratamento.adjust_money_to_float(df, Constants.AUTO_VALUE)
     
     #DataFrame convertido inteiramente para valores numéricos
     df_tratado = Tratamento.enumerar_dataframe(df[[Constants.CPF_RESTRICTION,Constants.STATE,Constants.MONTHLY_INCOME, 
-    Constants.AUTO_VALUE_FAIXA_VALOR,Constants.LOAN_AMOUNT_VALUE, Constants.OPERATION_STATUS]])
+    Constants.AUTO_VALUE,Constants.LOAN_AMOUNT, Constants.OPERATION_STATUS]])
     analise_correl(Constants.CPF_RESTRICTION, df_tratado, df[[Constants.CPF_RESTRICTION, Constants.OPERATION_STATUS]])
     print("Analise estados")
     analise_correl(Constants.STATE, df_tratado, df[[Constants.STATE, Constants.OPERATION_STATUS]])
@@ -31,7 +30,7 @@ def main ():
     #Analise de estado pós ajuste por regiao
     Tratamento.estados_por_regiao(df)
     df_tratado = Tratamento.enumerar_dataframe(df[[Constants.CPF_RESTRICTION,Constants.STATE,Constants.MONTHLY_INCOME,Constants.IDADE, 
-    Constants.AUTO_VALUE_FAIXA_VALOR,Constants.LOAN_AMOUNT_VALUE, Constants.OPERATION_STATUS]])
+    Constants.AUTO_VALUE,Constants.LOAN_AMOUNT, Constants.OPERATION_STATUS]])
     print("Analise regiões")
     analise_correl(Constants.STATE, df_tratado, df[[Constants.STATE, Constants.OPERATION_STATUS]])
     
@@ -40,7 +39,6 @@ def main ():
     df.dropna(subset=[Constants.MONTHLY_INCOME], inplace=True)
     analise_correl(Constants.MONTHLY_INCOME, df_tratado, df[[Constants.MONTHLY_INCOME, Constants.OPERATION_STATUS]])
 
-    print(df_tratado)
     #Boxplot de renda
     message = "quer ver o boxplot?\n1- Sim\n2- Não\n"
     response = input(message)
@@ -55,9 +53,9 @@ def main ():
             print("Valor invalido! Digite 1 para Sim e 2 para Não")
 
     #Predição
-    x = df_tratado[[Constants.CPF_RESTRICTION,Constants.STATE,Constants.LOAN_AMOUNT_VALUE, Constants.IDADE, Constants.AUTO_VALUE_FAIXA_VALOR, Constants.MONTHLY_INCOME]]
+    x = df_tratado[[Constants.CPF_RESTRICTION,Constants.STATE,Constants.LOAN_AMOUNT, Constants.IDADE, Constants.AUTO_VALUE, Constants.MONTHLY_INCOME]]
     y = df_tratado[Constants.OPERATION_STATUS]
-    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.50, random_state=1, stratify=y)
+    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.5, random_state=1, stratify=y)
     knn = KNeighborsClassifier(n_neighbors=5)
     
     knn.fit(X_train, y_train)

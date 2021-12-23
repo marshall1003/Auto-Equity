@@ -22,7 +22,7 @@ def enumerar_dataframe(df_origem: pd.DataFrame):
     
     df = df_origem.copy()
     for i in df.columns:
-        if(i  == Constants.IDADE or i  == Constants.LOAN_AMOUNT_VALUE or i  == Constants.AUTO_VALUE_FAIXA_VALOR):
+        if(i  == Constants.IDADE or i  == Constants.LOAN_AMOUNT or i  == Constants.AUTO_VALUE):
             pass
         else:
             df[i].replace(df[i].unique(), enumerar(df[i].unique()), inplace=True)
