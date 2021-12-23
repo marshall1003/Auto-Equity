@@ -36,7 +36,7 @@ def main ():
     df[Constants.MONTHLY_INCOME] = df[Constants.MONTHLY_INCOME].apply(lambda x: float(x.replace(".","").replace(",",".").replace("$","")))
     df.dropna(subset=[Constants.MONTHLY_INCOME], inplace=True)
     Graphics.boxplot(df[Constants.MONTHLY_INCOME])
-    analise_correl(Constants.MONTHLY_INCOME, Tratamento.faixas_salariais(df_tratado), df[[Constants.MONTHLY_INCOME, Constants.OPERATION_STATUS]])
+    analise_correl(Constants.MONTHLY_INCOME, df_tratado, df[[Constants.MONTHLY_INCOME, Constants.OPERATION_STATUS]])
 
     x = df[[Constants.CPF_RESTRICTION,Constants.STATE, Constants.MONTHLY_INCOME]]
     y = df[Constants.OPERATION_STATUS]

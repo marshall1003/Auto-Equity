@@ -35,14 +35,14 @@ def de_para_numeros(array):
 
 def faixas_salariais(df: pd.DataFrame):
     temp_df = df.copy()
-    temp_df.replace(temp_df.loc[(temp_df[Constants.MONTHLY_INCOME] >= 800) & (temp_df[Constants.MONTHLY_INCOME] < 1600)], 0, inplace=True)
-    temp_df.replace(temp_df.loc[(temp_df[Constants.MONTHLY_INCOME] >= 1600) & (temp_df[Constants.MONTHLY_INCOME] < 2400)], 1, inplace=True)
-    temp_df.replace(temp_df.loc[(temp_df[Constants.MONTHLY_INCOME] >= 2400) & (temp_df[Constants.MONTHLY_INCOME] < 3200)], 2, inplace=True)
-    temp_df.replace(temp_df.loc[(temp_df[Constants.MONTHLY_INCOME] >= 3200) & (temp_df[Constants.MONTHLY_INCOME] < 4000)], 3, inplace=True)
-    temp_df.replace(temp_df.loc[(temp_df[Constants.MONTHLY_INCOME] >= 4000) & (temp_df[Constants.MONTHLY_INCOME] < 5500)], 4, inplace=True)
-    temp_df.replace(temp_df.loc[(temp_df[Constants.MONTHLY_INCOME] >= 5500) & (temp_df[Constants.MONTHLY_INCOME] < 7000)], 5, inplace=True)
-    temp_df.replace(temp_df.loc[(temp_df[Constants.MONTHLY_INCOME] >= 7000) & (temp_df[Constants.MONTHLY_INCOME] < 10000)], 6, inplace=True)
-    temp_df.replace(temp_df.loc[(temp_df[Constants.MONTHLY_INCOME] >= 10000) & (temp_df[Constants.MONTHLY_INCOME] < 25000)], 7, inplace=True)
+    #temp_df.replace(temp_df.loc[temp_df[Constants.MONTHLY_INCOME] >= 800  ], 0, inplace=True)
+    #temp_df.replace(temp_df.loc[temp_df[Constants.MONTHLY_INCOME] >= 1600 ], 1, inplace=True)
+    #temp_df.replace(temp_df.loc[temp_df[Constants.MONTHLY_INCOME] >= 2400 ], 2, inplace=True)
+    #temp_df.replace(temp_df.loc[temp_df[Constants.MONTHLY_INCOME] >= 3200 ], 3, inplace=True)
+    #temp_df.replace(temp_df.loc[temp_df[Constants.MONTHLY_INCOME] >= 4000 ], 4, inplace=True)
+    #temp_df.replace(temp_df.loc[temp_df[Constants.MONTHLY_INCOME] >= 5500 ], 5, inplace=True)
+    #temp_df.replace(temp_df.loc[temp_df[Constants.MONTHLY_INCOME] >= 7000 ], 6, inplace=True)
+    #temp_df.replace(temp_df.loc[temp_df[Constants.MONTHLY_INCOME] >= 10000], 7, inplace=True)
 
     return temp_df
     
