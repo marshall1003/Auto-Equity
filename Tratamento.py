@@ -3,6 +3,9 @@ from sklearn import preprocessing
 import Constants
 import datetime
 
+def adjust_money_to_float(df:pd.DataFrame, parameter):
+    df[parameter] = df[parameter].apply(lambda x: float(x.replace(".","").replace(",",".").replace("$","")))
+
 def idade_df (df: pd.DataFrame):
     temp = pd.DataFrame()
     temp["dob"] = pd.to_datetime(df["birth_date"])
@@ -19,7 +22,10 @@ def enumerar_dataframe(df_origem: pd.DataFrame):
     
     df = df_origem.copy()
     for i in df.columns:
-        df[i].replace(df[i].unique(), enumerar(df[i].unique()), inplace=True)
+        if(i  == Constants.IDADE or i  == Constants.LOAN_AMOUNT_VALUE or i  == Constants.AUTO_VALUE_FAIXA_VALOR):
+            pass
+        else:
+            df[i].replace(df[i].unique(), enumerar(df[i].unique()), inplace=True)
     return df
 
 def de_para_numeros(array):
@@ -33,19 +39,6 @@ def de_para_numeros(array):
     
     return output
 
-def faixas_salariais(df: pd.DataFrame):
-    temp_df = df.copy()
-    #temp_df.replace(temp_df.loc[temp_df[Constants.MONTHLY_INCOME] >= 800  ], 0, inplace=True)
-    #temp_df.replace(temp_df.loc[temp_df[Constants.MONTHLY_INCOME] >= 1600 ], 1, inplace=True)
-    #temp_df.replace(temp_df.loc[temp_df[Constants.MONTHLY_INCOME] >= 2400 ], 2, inplace=True)
-    #temp_df.replace(temp_df.loc[temp_df[Constants.MONTHLY_INCOME] >= 3200 ], 3, inplace=True)
-    #temp_df.replace(temp_df.loc[temp_df[Constants.MONTHLY_INCOME] >= 4000 ], 4, inplace=True)
-    #temp_df.replace(temp_df.loc[temp_df[Constants.MONTHLY_INCOME] >= 5500 ], 5, inplace=True)
-    #temp_df.replace(temp_df.loc[temp_df[Constants.MONTHLY_INCOME] >= 7000 ], 6, inplace=True)
-    #temp_df.replace(temp_df.loc[temp_df[Constants.MONTHLY_INCOME] >= 10000], 7, inplace=True)
-
-    return temp_df
-    
 def estados_por_regiao(df: pd.DataFrame):
     df.replace(["RS", "SC", "PR"], ["SUL","SUL", "SUL"], inplace=True)
     df.replace(["SP", "RJ", "MG", "ES"], ["SUDESTE", "SUDESTE", "SUDESTE", "SUDESTE"], inplace=True)
